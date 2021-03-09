@@ -4,19 +4,19 @@ from utils.Singleton import Singleton
 import requests
 import json
 
-class DB_Pockemon(metaclass=Singleton):
+class DB_Pokemon(metaclass=Singleton):
     db = None
     def __init__(self):
-        self.db = TinyDB('pockemon.json')
+        self.db = TinyDB('pokemon.json')
 
-    def addPockemon(self, pockemon):
-        return self.db.insert(pockemon)
+    def addPokemon(self, pokemon):
+        return self.db.insert(pokemon)
 
-    def getPockemons(self):
-        pockemon = self.db.all()
-        return pockemon
+    def getPokemons(self):
+        pokemon = self.db.all()
+        return pokemon
 
-    def getPockemonAPI(self, number):
+    def getPokemonAPI(self, number):
         solditems = requests.get('https://pokeapi.co/api/v2/pokemon/{}'.format(number))  # (your url)
         dataRequest = solditems.json()
         sprites = dataRequest["sprites"]
@@ -35,4 +35,4 @@ class DB_Pockemon(metaclass=Singleton):
         }
 
         print(dictToSend)
-        self.addPockemon(dictToSend)
+        self.addPokemon(dictToSend)
